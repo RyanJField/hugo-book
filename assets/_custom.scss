@@ -35,7 +35,7 @@
   }
 
   a{
-    color: $body-font-color
+    color: var(--body-font-color);
   }
 }
 
@@ -195,6 +195,7 @@ html.search-active {
   border-bottom: 0;
   border-left: 0;
   border-radius: 0;
+  color: var(--body-font-color);
 
   @include mq(md) {
     padding-top: $gutter-spacing-sm;
