@@ -12,7 +12,7 @@
 
 .custom-left {
   flex: 0 0 $menu-width;
-  font-size: $font-size-14;
+  font-size: var(--font-size-smaller);
   border-bottom: 1px solid lightgray;
   z-index: 1000000;
   @include mq(md) {
