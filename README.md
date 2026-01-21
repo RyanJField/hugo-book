@@ -1,6 +1,9 @@
 # Modified Hugo Book Theme
 
 The [Fair Data Pipeline Docs website](https://www.fairdatapipeline.org/) contains information related to datasets, the data pipeline, and various other technical documents associated with the Fair Data Pipeline project.
+[![Hugo](https://img.shields.io/badge/hugo-0.134-blue.svg)](https://gohugo.io)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+![Build with Hugo](https://github.com/alex-shpak/hugo-book/workflows/Build%20with%20Hugo/badge.svg)
 
 * [FAIRDataPipeline/fairdatapipeline.github.io](https://github.com/FAIRDataPipeline/fairdatapipeline.github.io) contains website source files.
 
@@ -34,7 +37,7 @@ The [Fair Data Pipeline Docs website](https://www.fairdatapipeline.org/) contain
 
 ## Requirements
 
-- Hugo 0.79 or higher
+- Hugo 0.134 or higher
 - Hugo extended version, [Installation Instructions](https://gohugo.io/installation/)
 
 ## Installation
@@ -93,44 +96,8 @@ hugo server --minify --theme hugo-book
 
 ## Menu
 
-### File tree menu (default)
-
 By default, the theme will render pages from the `content/docs` section as a menu in a tree structure.  
-You can set `title` and `weight` in the front matter of pages to adjust the order and titles in the menu.
-
-### Leaf bundle menu (Deprecated, to be removed in June 2022)
-
-You can also use leaf bundle and the content of its `index.md` file as menu.  
-Given you have the following file structure:
-
-```
-├── content
-│   ├── docs
-│   │   ├── page-one.md
-│   │   └── page-two.md
-│   └── posts
-│       ├── post-one.md
-│       └── post-two.md
-```
-
-Create a file `content/menu/index.md` with the content:
-
-```md
-+++
-headless = true
-+++
-
-- [Book Example]({{< relref "/docs/" >}})
-  - [Page One]({{< relref "/docs/page-one" >}})
-  - [Page Two]({{< relref "/docs/page-two" >}})
-- [Blog]({{< relref "/posts" >}})
-```
-
-And Enable it by setting `BookMenuBundle: /menu` in Site configuration.
-
-- [Example menu](https://github.com/alex-shpak/hugo-book/blob/master/exampleSite/content.en/menu/index.md)
-- [Example config file](https://github.com/alex-shpak/hugo-book/blob/master/exampleSite/config.yaml)
-- [Leaf bundles](https://gohugo.io/content-management/page-bundles/)
+You can set `title` and `weight` in the front matter of pages to adjust the order and titles in the menu, as well as other parameters to hide or alter urls in the menu. You can choose which folder to use for generating menu with `BookSection` configuration parameter.
 
 ## Blog
 
@@ -142,7 +109,7 @@ A blog is not the primary usecase of this theme, so it has only minimal features
 ### Site Configuration
 
 There are a few configuration options that you can add to your `hugo.toml` file.  
-You can also see the `yaml` example [here](https://github.com/alex-shpak/hugo-book/blob/master/exampleSite/config.yaml).
+You can also see the `yaml` example [here](https://github.com/alex-shpak/hugo-book/blob/master/exampleSite/hugo.yaml).
 
 ```toml
 # (Optional) Set Google Analytics if you use it to track your website.
@@ -177,11 +144,6 @@ disableKinds = ['taxonomy', 'taxonomyTerm']
   # (Optional, default none) Set the path to a logo for the book. If the logo is
   # /static/logo.png then the path would be 'logo.png'
   BookLogo = 'logo.png'
-
-  # (Optional, default none) Set leaf bundle to render as side menu
-  # When not specified file structure and weights will be used
-  # Deprecated, to be removed in June 2022
-  BookMenuBundle = '/menu'
 
   # (Optional, default docs) Specify section of content to render as menu
   # You can also set value to "*" to render all sections to menu
@@ -242,16 +204,16 @@ You can specify additional params in the front matter of individual pages:
 # Set type to 'docs' if you want to render page outside of configured section or if you render section other than 'docs'
 type = 'docs'
 
-# Set page weight to re-arrange items in file-tree menu (if BookMenuBundle not set)
+# Set page weight to re-arrange items in file-tree menu.
 weight = 10
 
-# (Optional) Set to 'true' to mark page as flat section in file-tree menu (if BookMenuBundle not set)
+# (Optional) Set to 'true' to mark page as flat section in file-tree menu.
 bookFlatSection = false
 
 # (Optional) Set to hide nested sections or pages at that level. Works only with file-tree menu mode
 bookCollapseSection = true
 
-# (Optional) Set true to hide page or section from side menu (if BookMenuBundle not set)
+# (Optional) Set true to hide page or section from side menu.
 bookHidden = false
 
 # (Optional) Set 'false' to hide ToC from page
@@ -263,7 +225,7 @@ bookComments = true
 # (Optional) Set to 'false' to exclude page from search index.
 bookSearchExclude = true
 
-# (Optional) Set explicit href attribute for this page in a menu (if BookMenuBundle not set)
+# (Optional) Set explicit href attribute for this page in a menu.
 bookHref = ''
 ```
 
@@ -340,7 +302,7 @@ If you are using `config.yaml` or `config.json`, consult the [configuration mark
 
 ## Versioning
 
-This theme follows a simple incremental versioning. e.g. `v1`, `v2` and so on. There might be breaking changes between versions.
+This theme follows a simple incremental versioning. e.g. `v1.0.0`, `v2.0.0` and so on. Releases will happen on breaking changes.
 
 If you want lower maintenance, use one of the released versions. If you want to live on the bleeding edge of changes, you can use the `master` branch and update your website when needed.
 
