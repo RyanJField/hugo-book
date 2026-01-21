@@ -8,7 +8,7 @@ description = "Modified Book Theme"
 homepage = "https://github.com/RyanJField/hugo-book"
 tags = ["responsive", "clean", "documentation", "docs", "flexbox", "search", "mobile", "multilingual", "disqus"]
 features = []
-min_version = "0.128.0"
+min_version = "0.146.0"
 
 [author]
   name = "Ryan Field"
