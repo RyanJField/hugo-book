@@ -1,23 +1,11 @@
-{{ if default false .Site.Params.SearchEnabled }}
-  <div class="custom-header">  
-    <div class="custom-flex container flex">
-      <div class="custom-left">
-        <div class="custom-brand">
-          <h2 class="custom-brand-text">
-            <a href="{{ .Site.BaseURL | relLangURL }}">
-            {{- with .Site.Params.BookLogo -}}
-            <img src="{{ . | relURL }}" alt="Logo" />
-            {{- end -}}
-            <span>{{ .Site.Title }}</span>
-            </a>
-          </h2>
-          </div> 
-        </div>  
-      <div class ="custom-search-container">
-        {{ partial "docs/search-top" . }}
-      </div>
-    </div>    
-  </div>
-  {{ end }}
+{{- if default false .Site.Params.SearchEnabled }}
+<script defer type="text/javascript" src="{{ "lunr.min.js" | relURL }}"></script>
+{{ end -}}
+
+{{- if default false .Site.Params.SearchEnabled }}
+{{- $fancy_searchJSFile := printf "%s.fancy-search.js" .Language.Lang }}
+{{- $fancy_searchJS := resources.Get "fancy-search.js" | resources.ExecuteAsTemplate $fancy_searchJSFile . | resources.Minify | resources.Fingerprint }}
+<script defer src="{{ $fancy_searchJS.RelPermalink }}" integrity="{{ $fancy_searchJS.Data.Integrity }}"></script>
+{{ end -}}
 
 <script defer src="{{ "scroll.js" | relURL }}"></script>
