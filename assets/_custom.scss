@@ -10,6 +10,15 @@
 @import "plugins/typography";
 @import "scriptstyle";
 
+$search-background-color: var(--body-background);
+.chroma .nt {
+  color: var(--body-font-color);
+}
+
+.chroma .sd, .chroma .n, .chroma .nn {
+  color: var(--gray-500);
+}
+
 .custom-left {
   flex: 0 0 $menu-width;
   font-size: var(--font-size-smaller);
