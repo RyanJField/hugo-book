@@ -15,3 +15,9 @@
 
 - id: Switch to light mode
   translation: Switch to light mode
+
+- id: Zoom image
+  translation: Zoom image
+
+- id: Close
+  translation: Close

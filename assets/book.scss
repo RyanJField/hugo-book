@@ -81,3 +81,109 @@
   display: none;
 }
 {{ end }}
+
+// Image zoom: a magnifying glass on each Markdown image opens it in a popup
+{{ if default true .Site.Params.BookImageZoom }}
+.book-zoom {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+
+  > img {
+    cursor: zoom-in;
+  }
+}
+
+.book-zoom-button,
+.book-zoom-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--border-radius);
+  background: var(--body-background);
+  color: var(--body-font-color);
+  cursor: pointer;
+
+  &:hover {
+    background: var(--gray-100);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-link);
+    outline-offset: 2px;
+  }
+}
+
+.book-zoom-button {
+  position: absolute;
+  top: $padding-8;
+  right: $padding-8;
+  width: 2rem;
+  height: 2rem;
+  opacity: 0.75;
+
+  .book-zoom:hover &,
+  &:focus-visible {
+    opacity: 1;
+  }
+}
+
+// No zoom button on an image that is itself a link
+a .book-zoom-button {
+  display: none;
+}
+
+.book-zoom-dialog {
+  width: 95vw;
+  height: 95vh;
+  max-width: none;
+  max-height: none;
+  padding: $padding-16 * 2.5 $padding-16 $padding-16;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--border-radius);
+  background: var(--body-background);
+  color: var(--body-font-color);
+
+  &::backdrop {
+    background: rgba(0, 0, 0, 0.6);
+  }
+
+  .book-zoom-frame {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    cursor: zoom-in;
+    // Diagrams are drawn for a white page; keep them readable in dark mode
+    background: white;
+  }
+
+  // Full size: the image keeps its own proportions and the frame scrolls
+  &.book-zoom-full img {
+    max-width: none;
+    height: auto;
+    cursor: zoom-out;
+  }
+}
+
+.book-zoom-close {
+  position: absolute;
+  top: $padding-8;
+  right: $padding-8;
+  width: 2rem;
+  height: 2rem;
+}
+
+// Stop the page scrolling behind an open popup
+html:has(.book-zoom-dialog[open]) {
+  overflow: hidden;
+}
+{{ end }}

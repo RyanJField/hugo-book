@@ -142,6 +142,10 @@ disableKinds = ['taxonomy', 'taxonomyTerm']
   # The visitor's choice is remembered; until they choose, BookTheme applies.
   BookThemeToggle = true
 
+  # (Optional, default true) Adds a magnifying glass to images from this site in markdown pages,
+  # which opens the image in a popup; clicking the enlarged image shows it at full size.
+  BookImageZoom = true
+
   # (Optional, default true) Controls table of contents visibility on right side of pages.
   # Start and end levels can be controlled with markup.tableOfContents setting.
   # You can also specify this parameter per page in front matter.
