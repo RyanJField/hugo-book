@@ -138,6 +138,10 @@ disableKinds = ['taxonomy', 'taxonomyTerm']
   # Theme 'auto' switches between dark and light modes based on browser/os preferences
   BookTheme = 'light'
 
+  # (Optional, default true) Shows a button that switches between light and dark mode.
+  # The visitor's choice is remembered; until they choose, BookTheme applies.
+  BookThemeToggle = true
+
   # (Optional, default true) Controls table of contents visibility on right side of pages.
   # Start and end levels can be controlled with markup.tableOfContents setting.
   # You can also specify this parameter per page in front matter.
@@ -187,6 +191,13 @@ disableKinds = ['taxonomy', 'taxonomyTerm']
   # Portable links meant to work with text editors and let you write markdown without {{< relref >}} shortcode
   # Theme will print warning if page referenced in markdown does not exists.
   BookPortableLinks = true
+
+  # (Optional, default false) Opens external links in markdown pages in a new tab.
+  BookExternalLinksNewTab = false
+
+  # (Optional, default none) Path prefixes on this site that belong to the book, e.g. ['/docs/'].
+  # When set, links to any other path on this site, except the home page, count as external.
+  # BookInternalPaths = ['/docs/']
 
   # /!\ This is an experimental feature, might be removed or changed at any time
   # (Optional, experimental, default false) Enables service worker that caches visited pages and resources for offline use.

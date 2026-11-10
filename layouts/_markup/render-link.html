@@ -1,6 +1,34 @@
+{{- /* Markdown link hook.
+       With BookExternalLinksNewTab, external links open in a new tab. A link is external if it
+       goes to another site, or, when BookInternalPaths lists path prefixes (e.g. ['/docs/']),
+       to a path on this site other than the home page that starts with none of them. */ -}}
 {{- $destination := .Destination -}}
 {{- if .Page.Site.Params.BookPortableLinks -}}
   {{- $destination = partial "docs/links/portable-link" . -}}
 {{- end -}}
-<a href="{{ $destination | safeURL }}"{{ with .Title}} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>
+{{- $external := false -}}
+{{- if .Page.Site.Params.BookExternalLinksNewTab -}}
+  {{- $url := urls.Parse .Destination -}}
+  {{- $siteHost := strings.TrimPrefix "www." (urls.Parse site.BaseURL).Host -}}
+  {{- $internalPaths := .Page.Site.Params.BookInternalPaths -}}
+  {{- $sitePath := "" -}}
+  {{- if in (slice "http" "https") $url.Scheme -}}
+    {{- if ne (strings.TrimPrefix "www." $url.Host) $siteHost -}}
+      {{- $external = true -}}
+    {{- else -}}
+      {{- $sitePath = default "/" $url.Path -}}
+    {{- end -}}
+  {{- else if and (eq $url.Scheme "") (eq $url.Host "") (strings.HasPrefix $url.Path "/") -}}
+    {{- $sitePath = $url.Path -}}
+  {{- end -}}
+  {{- if and $sitePath $internalPaths (ne $sitePath "/") -}}
+    {{- $external = true -}}
+    {{- range $internalPaths -}}
+      {{- if strings.HasPrefix $sitePath . -}}
+        {{- $external = false -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+<a href="{{ $destination | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if $external }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ .Text | safeHTML }}</a>
 {{- /**/ -}}

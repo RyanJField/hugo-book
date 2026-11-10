@@ -1,5 +1,6 @@
-{{- /* remove whitespaces */ -}}
-<pre class="mermaid">{{ .Inner | htmlEscape | safeHTML -}}</pre>
+{{- /* Mermaid code block. An optional background colour, e.g. ```mermaid {background="white"},
+       keeps a diagram readable in dark mode. */ -}}
+<pre class="mermaid"{{ with .Attributes.background }} style="background-color: {{ . | safeCSS }}"{{ end }}>{{ .Inner | htmlEscape | safeHTML -}}</pre>
 {{- if not (.Page.Store.Get "mermaid") -}}
   {{- /* Include mermaid only first time */ -}}
   <script src="{{ "mermaid.min.js" | relURL }}"></script>
