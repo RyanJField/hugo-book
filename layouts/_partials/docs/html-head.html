@@ -10,6 +10,12 @@ https://github.com/alex-shpak/hugo-book
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark">
 
+{{- if default true .Site.Params.BookThemeToggle }}
+{{- with resources.Get "theme-toggle.js" | resources.ExecuteAsTemplate "theme-toggle.js" . | resources.Minify }}
+<script>{{ .Content | safeJS }}</script>
+{{- end }}
+{{- end }}
+
 {{- with .Page.Params.BookHref -}}
   <meta http-equiv="Refresh" content="0; url='{{ . }}'" />
 {{- end -}}

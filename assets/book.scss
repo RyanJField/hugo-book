@@ -17,3 +17,67 @@
 :root {
   @include theme-{{ default "light" .Site.Params.BookTheme }};
 }
+
+// Light / dark mode toggle: the theme chosen with the toggle button, set as
+// data-theme on <html> by theme-toggle.js, overrides the site's default
+{{ if default true .Site.Params.BookThemeToggle }}
+:root[data-theme="light"] {
+  @include theme-light;
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  @include theme-dark;
+  color-scheme: dark;
+}
+
+.book-theme-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--border-radius);
+  background: transparent;
+  color: var(--body-font-color);
+  cursor: pointer;
+
+  &:hover {
+    background: var(--gray-100);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-link);
+    outline-offset: 2px;
+  }
+}
+
+// Next to the search box in the top bar
+.custom-search-row {
+  display: flex;
+  align-items: center;
+  gap: $padding-8;
+
+  > .search-top {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+}
+
+// Under the logo in the menu, when search is off
+.book-brand-row .book-theme-toggle {
+  margin-bottom: $padding-16;
+}
+
+:root[data-theme] .book-theme-toggle {
+  display: inline-flex;
+}
+
+:root[data-theme="light"] .book-theme-toggle-sun,
+:root[data-theme="dark"] .book-theme-toggle-moon {
+  display: none;
+}
+{{ end }}

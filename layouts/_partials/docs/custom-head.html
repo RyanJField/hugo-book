@@ -14,7 +14,10 @@
           </div> 
         </div>  
       <div class ="custom-search-container">
-        {{ partial "docs/search-top" . }}
+        <div class="custom-search-row">
+          {{ partial "docs/search-top" . }}
+          {{ partial "docs/theme-toggle" . }}
+        </div>
       </div>
     </div>    
   </div>
